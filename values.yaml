@@ -42,6 +42,27 @@ grafana:
   forceDeployDashboards: false
   defaultDashboardsEnabled: true
   defaultDashboardsTimezone: utc
+  persistence:
+    enabled: true
+  datasources:
+    datasources.yaml:
+      apiVersion: 1
+      datasources:
+        - name: Loki
+          type: loki
+          url: http://loki:3100/
+          access: proxy
+          isDefault: false
+        - name: Prometheus
+          type: prometheus
+          url: http://prometheus-prometheus:9090/
+          access: proxy
+          isDefault: true
+        - name: AlertManager
+          type: alertmanager
+          url: http://prometheus-alertmanager:9093/
+          access: false
+          isDefault: true
   serviceMonitor:
     enabled: true
   admin:
